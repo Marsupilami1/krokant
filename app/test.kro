@@ -13,6 +13,19 @@ state main {
 	}
 }
 
+state not_main {
+	mark 3;
+	unmark 3;
+	if (M42 Here) {
+		test1();
+	} else {
+		unmark 42;
+	}
+	pickup {
+		turn Left;
+	}
+}
+
 fn test1() {
 	test();
 }

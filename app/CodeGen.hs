@@ -73,11 +73,14 @@ runGen m e = runFreshness $ runExceptT $ runReaderT m e
 translateProgram :: Ast.Program -> Either String [Asm]
 translateProgram p =
   let funsMap = M.fromList [(name, toAsm stmts) | (Ast.Fun name stmts) <- funs] in
-  runGen (toAsm states) (Env funsMap)
+  runGen (toAsm (reverse states)) (Env funsMap)
   where
-    (states, funs) = partition isState p
+    (states, other) = partition isState p
+    (funs, _globals) = partition isFun other
     isState (Ast.State _ _) = True
     isState _ = False
+    isFun (Ast.Fun _ _) = True
+    isFun _ = False
 
 fresh :: Gen Int
 fresh = do
