@@ -2,20 +2,20 @@ state name {
 	mark 3;
 	unmark 3;
 	if (M42 Here) {
-	   test1();
+		test1();
 	} else {
-	   unmark 42;
+		unmark 42;
 	}
 	pickup {
-	   turn Left;
-    }
+		turn Left;
+	}
 	switch name;
 }
 
 fn test1() {
-   test();
+	test();
 }
 
 fn test() {
-   mark 42;
+	mark 42;
 }

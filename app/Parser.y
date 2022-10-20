@@ -30,9 +30,12 @@ import System.Exit
 ','    { TComma }
 ';'    { TSemicolon }
 '&&'   { TAnd }
-'||'  { TOr }
+'||'   { TOr }
+'='    { TEq }
+'<='   { TLower }
 fn     { TFn }
 state  { TState }
+global { TGlobal }
 if     { TIf }
 else   { TElse }
 
@@ -88,6 +91,7 @@ Program :: { Program }
 Decl :: { Decl }
   : fn var '(' ')' '{' Statements '}' { Fun $2 (reverse $6)}
   | state var '{' Statements '}' { State $2 (reverse $4)}
+  | global var '=' int '<=' int { Global $2 $4 $6}
 
 Statements :: { Statements }
   : Statement { [$1] }

@@ -13,9 +13,7 @@ main = do
   argv <- getArgs
   let filename = argv !! 0
   contents <- readFile filename
-  print contents
   let parsetree = parse (alexScanTokens $ init $ contents)
-  print parsetree
   case translateProgram parsetree of
     Left err -> do
       hPutStrLn stderr "Program generation failed !"

@@ -20,8 +20,11 @@ tokens :-
   ";"                            { const TSemicolon }
   "&&"                           { const TAnd }
   "||"                           { const TOr }
+  "="                            { const TEq }
+  "<="                           { const TLower }
   fn                             { const TFn }
   state                          { const TState }
+  global                         { const TGlobal }
   if                             { const TIf }
   else                           { const TElse }
 
@@ -76,8 +79,11 @@ data Token
   | TSemicolon
   | TAnd
   | TOr
+  | TEq
+  | TLower
   | TFn
   | TState
+  | TGlobal
   | TIf
   | TElse
 

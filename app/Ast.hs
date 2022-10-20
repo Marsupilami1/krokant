@@ -11,6 +11,7 @@ type Program = [Decl]
 data Decl
   = Fun String Statements
   | State String Statements
+  | Global String Int Int
   deriving Show
 
 type Args = [String]

@@ -4,7 +4,7 @@
 module CodeGen (translateProgram, prettyPrintAsmInstruction) where
 
 import qualified Ast as Ast
-import Data.List
+import Data.List (partition)
 
 import qualified Data.Map as M
 import Data.Map (Map)
@@ -77,7 +77,8 @@ translateProgram p =
   where
     (states, funs) = partition isState p
     isState (Ast.State _ _) = True
-    isState (Ast.Fun _ _) = False
+    isState _ = False
+
 
 
 fresh :: Gen Int
@@ -95,10 +96,17 @@ instance ToAsm Ast.Program where
 instance ToAsm Ast.Decl where
   toAsm (Ast.State name stmts) = do
     stmtsAsm <- toAsm stmts
-    return $ Label name : stmtsAsm
+    return $
+      [ Label name
+      ] ++ stmtsAsm ++
+      [ Goto name
+      ]
 
   toAsm (Ast.Fun _ _) = do
     throwError "Cannot translate fun to Asm."
+
+  toAsm (Ast.Global _ _ _) = do
+    throwError "Cannot translate global to Asm."
 
 instance ToAsm Ast.Statements where
   toAsm stmts = do
@@ -156,7 +164,8 @@ instance ToAsm Ast.Statement where
       , Goto lblSuccess
       , Label lblError
       ] ++ stmtsAsm ++
-      [ Label lblSuccess ]
+      [ Goto lblSuccess
+      , Label lblSuccess ]
 
   toAsm (Ast.Drop) =
     return [Drop]
@@ -183,7 +192,9 @@ instance ToAsm Ast.Statement where
       , Goto lblSuccess
       , Label lblError
       ] ++ stmtsAsm ++
-      [ Label lblSuccess ]
+      [ Goto lblSuccess
+      , Label lblSuccess
+      ]
 
   toAsm (Ast.Call funName) = do
     Env env <- ask
