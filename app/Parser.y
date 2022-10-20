@@ -107,7 +107,7 @@ Statement :: { Statement }
   | pass ';' { Pass }
   | switch var ';' { Switch $2 }
   | turn Dir ';' { Turn $2 }
-  | move '{' Statements '}' { Move $3 }
+  | move '{' Statements '}' { Move (reverse $3) }
   | var '(' ')' ';' { Call $1 }
 
 Condition :: { Condition }
