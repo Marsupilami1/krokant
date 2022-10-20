@@ -43,7 +43,7 @@ prettyPrintAsmInstruction (Mark n) =
 prettyPrintAsmInstruction (Unmark n) =
   "  Unmark " ++ show n
 prettyPrintAsmInstruction (PickUp lbl) =
-  "  Pickup " ++ lbl
+  "  PickUp " ++ lbl
 prettyPrintAsmInstruction (Drop) =
   "  Drop"
 prettyPrintAsmInstruction (Turn DLeft) =
@@ -78,8 +78,6 @@ translateProgram p =
     (states, funs) = partition isState p
     isState (Ast.State _ _) = True
     isState _ = False
-
-
 
 fresh :: Gen Int
 fresh = do
