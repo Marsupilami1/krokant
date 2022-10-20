@@ -1,0 +1,50 @@
+Label "name"
+Mark 3
+Unmark 3
+Sense Ahead "_IFthen8" "_IFelse8" Foe
+Label "_IFthen8"
+Sense Here "_IFthen9" "_IFelse9" (Marker 9)
+Label "_IFthen9"
+Mark 0
+Goto "_IFend9"
+Label "_IFelse9"
+Sense RightAhead "_IFthen10" "_IFelse10" (Marker 1)
+Label "_IFthen10"
+Mark 0
+Goto "_IFend10"
+Label "_IFelse10"
+Goto "_IFend10"
+Label "_IFend10"
+Goto "_IFend9"
+Label "_IFend9"
+Goto "_IFend8"
+Label "_IFelse8"
+Sense LeftAhead "_IFthen11" "_IFelse11" Home
+Label "_IFthen11"
+Sense Here "_IFthen12" "_IFelse12" (Marker 9)
+Label "_IFthen12"
+Mark 0
+Goto "_IFend12"
+Label "_IFelse12"
+Sense RightAhead "_IFthen13" "_IFelse13" (Marker 1)
+Label "_IFthen13"
+Mark 0
+Goto "_IFend13"
+Label "_IFelse13"
+Goto "_IFend13"
+Label "_IFend13"
+Goto "_IFend12"
+Label "_IFend12"
+Goto "_IFend11"
+Label "_IFelse11"
+Sense RightAhead "_IFthen14" "_IFelse14" (Marker 1)
+Label "_IFthen14"
+Mark 0
+Goto "_IFend14"
+Label "_IFelse14"
+Goto "_IFend14"
+Label "_IFend14"
+Goto "_IFend11"
+Label "_IFend11"
+Goto "_IFend8"
+Label "_IFend8"
